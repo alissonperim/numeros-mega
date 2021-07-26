@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 export const GenerateButton = styled.button`
@@ -11,12 +11,20 @@ export const GenerateButton = styled.button`
   padding: 1rem 2.5rem;
   font-size: 1rem;
   border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   &:hover{
     background-color: #ff3939;
+  }
+  &:active{
+    transform: scale(0.99);
   }
 `
 
 export const Button = (props) => {
+  const {
+    onGenerateNumbers,
+    amount = 6
+  } = props
 
   function generateNumbers(numbers) {
     const generatedArr = []
@@ -25,21 +33,17 @@ export const Button = (props) => {
       generatedArr.indexOf(number) === -1 ?
         generatedArr.push(number) : i--
     }
-    console.log(generatedArr.sort((n1, n2) => n1 - n2))
     return generatedArr.sort((n1, n2) => n1 - n2)
   }
-  const [amount, setAmount] = useState(props.amount || 6)
-  const [megaNumber, setMegaNumber] = useState(Array(amount).fill(0))
 
-  function renderNumbers(arr, index) {
-    return (
-      <div key={index} className="number">{arr}</div>
-    )
+  const handleGenerateNumbers = () => {
+    const numbers = generateNumbers(amount)
+    onGenerateNumbers(numbers)
   }
 
   return (
     <>
-      <GenerateButton onClick={_ => setMegaNumber(generateNumbers(amount))} returnNumbers={megaNumber}>
+      <GenerateButton onClick={handleGenerateNumbers}>
         Gerar Números
       </GenerateButton>
     </>

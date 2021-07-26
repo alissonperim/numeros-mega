@@ -1,6 +1,5 @@
 import './commons/global.css'
 import './App.css';
-import { Button } from './components/Button';
 import { NumbersContainer } from './components/RenderNumbers';
 
 function App() {

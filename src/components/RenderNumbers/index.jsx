@@ -28,6 +28,7 @@ export const RenderDiv = styled.div`
     align-items: center;
     flex-wrap: wrap;
     margin: 16px 0;
+    min-height: 100px;
     .number{
       display: flex;
       justify-content: center;
@@ -38,6 +39,7 @@ export const RenderDiv = styled.div`
       font-size: 1.3rem;
       background-color: #ffa700;
       margin-right: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
       &:last-of-type{
         margin: 0;
       }
@@ -46,9 +48,6 @@ export const RenderDiv = styled.div`
 `
 export const NumbersContainer = (props) => {
   const [numbers, setNumbers] = useState([])
-  function getNumbers(num) {
-    setNumbers(num)
-  }
 
   function setNumbersFunc(num, index) {
     return (
@@ -60,9 +59,9 @@ export const NumbersContainer = (props) => {
     <RenderDiv>
       <h2>NÚMEROS PARA MEGA</h2>
       <div className="numbers-container">
-        <Button amount={10} returnNumbers={getNumbers} />
-        {console.log(numbers)}
+        {numbers.map(setNumbersFunc)}
       </div>
+      <Button amount={6} onGenerateNumbers={setNumbers} />
     </RenderDiv>
   )
 }
